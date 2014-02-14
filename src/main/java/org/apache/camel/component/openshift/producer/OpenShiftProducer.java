@@ -34,6 +34,13 @@ public class OpenShiftProducer extends DefaultProducer {
 		// Execute operation
 		Object o = operation.execute(exchange);
 		exchange.getOut().setBody(o);
+		
+		// Copy Headers from Input Message to Output Message
+		for(String key : exchange.getIn().getHeaders().keySet()) {
+			Object value = exchange.getIn().getHeader(key);
+			exchange.getOut().setHeader(key, value);
+		}
+			
 			
 	}
 

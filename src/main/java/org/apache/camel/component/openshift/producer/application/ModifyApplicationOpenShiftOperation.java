@@ -15,7 +15,7 @@ import com.openshift.client.IApplication;
  *
  */
 public class ModifyApplicationOpenShiftOperation implements
-		OpenShiftOperation<String> {
+		OpenShiftOperation<IApplication> {
 
 	private OpenShiftEndpoint endpoint;
 	private String applicationUUID;
@@ -29,7 +29,7 @@ public class ModifyApplicationOpenShiftOperation implements
 	}
 
 	@Override
-	public String execute(Exchange e) {
+	public IApplication execute(Exchange e) {
 
 		IApplication application = OpenShiftHelper.getApplicationByUUID(
 				endpoint.getConfiguration(), applicationUUID, true);
@@ -57,7 +57,8 @@ public class ModifyApplicationOpenShiftOperation implements
 			throw new IllegalArgumentException("Invalid Application Operation");
 		}
 		
-		return "Success";
+		return OpenShiftHelper.getApplicationByUUID(
+				endpoint.getConfiguration(), applicationUUID, true);
 
 	}
 

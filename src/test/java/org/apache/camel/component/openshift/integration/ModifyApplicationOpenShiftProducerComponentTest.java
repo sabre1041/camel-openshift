@@ -30,7 +30,7 @@ public class ModifyApplicationOpenShiftProducerComponentTest  extends BaseOpenSh
 		resultEndpoint.expectedMinimumMessageCount(1);
     	resultEndpoint.assertIsSatisfied();
         
-        assertEquals("Success", resultEndpoint.getExchanges().get(0).getIn().getBody());
+        assertNotNull(resultEndpoint.getExchanges().get(0).getIn().getBody());
     
 	}
 	

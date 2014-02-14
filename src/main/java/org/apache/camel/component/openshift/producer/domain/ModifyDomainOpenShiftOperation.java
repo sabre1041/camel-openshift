@@ -16,7 +16,7 @@ import com.openshift.client.IDomain;
  *
  */
 public class ModifyDomainOpenShiftOperation implements
-		OpenShiftOperation<String> {
+		OpenShiftOperation<IDomain> {
 
 	private OpenShiftEndpoint endpoint;
 	private String domainId;
@@ -30,7 +30,7 @@ public class ModifyDomainOpenShiftOperation implements
 	}
 
 	@Override
-	public String execute(Exchange e) {
+	public IDomain execute(Exchange e) {
 
 		IDomain domain = OpenShiftHelper.getDomainById(
 				endpoint.getConfiguration(), domainId, true);
@@ -43,7 +43,8 @@ public class ModifyDomainOpenShiftOperation implements
 			throw new IllegalArgumentException("Invalid Application Operation");
 		}
 
-		return "Success";
+		return OpenShiftHelper.getDomainById(
+				endpoint.getConfiguration(), domainId, true);
 
 	}
 
