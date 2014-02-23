@@ -5,6 +5,7 @@ import java.util.Map;
 import org.apache.camel.Exchange;
 import org.apache.camel.Message;
 import org.apache.camel.RuntimeCamelException;
+import org.apache.camel.component.openshift.OpenShiftApplicationCreationException;
 import org.apache.camel.component.openshift.OpenShiftConstants;
 import org.apache.camel.component.openshift.OpenShiftEndpoint;
 import org.apache.camel.component.openshift.OpenShiftOperation;
@@ -47,7 +48,7 @@ public class CreateApplicationOpenShiftOperation implements OpenShiftOperation<I
 			String cartridge = createApplicationMap.get(OpenShiftConstants.NEW_APPLICATION_CARTRIDGE);
 			
 			if(appName == null || cartridge == null) {
-				throw new RuntimeCamelException("Application and Cartridge Must be Provided");
+				throw new OpenShiftApplicationCreationException("Application and Cartridge Must be Provided");
 			}
 			
 			return domain.createApplication(appName, new StandaloneCartridge(cartridge));
@@ -56,7 +57,7 @@ public class CreateApplicationOpenShiftOperation implements OpenShiftOperation<I
 		
 		}
 		else {
-			throw new RuntimeCamelException("Body must be a Map containing new Application Parameters");
+			throw new OpenShiftApplicationCreationException("Body must be a Map containing new Application Parameters");
 		}
 	}
 

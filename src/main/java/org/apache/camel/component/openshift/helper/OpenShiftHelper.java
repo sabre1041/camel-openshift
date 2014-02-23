@@ -2,8 +2,10 @@ package org.apache.camel.component.openshift.helper;
 
 import org.apache.camel.Message;
 import org.apache.camel.RuntimeCamelException;
+import org.apache.camel.component.openshift.OpenShiftApplicationNotFoundException;
 import org.apache.camel.component.openshift.OpenShiftConfiguration;
 import org.apache.camel.component.openshift.OpenShiftConstants;
+import org.apache.camel.component.openshift.OpenShiftDomainNotFoundException;
 
 import com.openshift.client.IApplication;
 import com.openshift.client.IDomain;
@@ -65,7 +67,7 @@ public class OpenShiftHelper {
 		}
 		
 		if(required) {
-			throw new RuntimeCamelException("Domain does not exist");
+			throw new OpenShiftDomainNotFoundException();
 		}
 		else {
 			return null;
@@ -101,7 +103,7 @@ public class OpenShiftHelper {
 		}
 		
 		if(required) {
-			throw new RuntimeCamelException("Application does not exist");
+			throw new OpenShiftApplicationNotFoundException();
 		}
 		else {
 			return null;

@@ -2,6 +2,7 @@ package org.apache.camel.component.openshift.producer.domain;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.component.openshift.DomainOperationType;
+import org.apache.camel.component.openshift.InvalidOpenShiftDomainOperationException;
 import org.apache.camel.component.openshift.OpenShiftEndpoint;
 import org.apache.camel.component.openshift.OpenShiftOperation;
 import org.apache.camel.component.openshift.helper.OpenShiftHelper;
@@ -40,7 +41,7 @@ public class ModifyDomainOpenShiftOperation implements
 			domain.destroy();
 			break;
 		default:
-			throw new IllegalArgumentException("Invalid Application Operation");
+			throw new InvalidOpenShiftDomainOperationException("Invalid Domain Operation");
 		}
 
 		return OpenShiftHelper.getDomainById(

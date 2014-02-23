@@ -6,6 +6,7 @@ import org.apache.camel.Exchange;
 import org.apache.camel.Message;
 import org.apache.camel.RuntimeCamelException;
 import org.apache.camel.component.openshift.OpenShiftConstants;
+import org.apache.camel.component.openshift.OpenShiftDomainCreationException;
 import org.apache.camel.component.openshift.OpenShiftEndpoint;
 import org.apache.camel.component.openshift.OpenShiftOperation;
 
@@ -45,7 +46,7 @@ private OpenShiftEndpoint endpoint;
 		}
 		
 		if(domainId == null) {
-			throw new RuntimeCamelException("Application and Cartridge Must be Provided");
+			throw new OpenShiftDomainCreationException("Application and Cartridge Must be Provided");
 		}
 			
 		return endpoint.getConfiguration().getOpenShift().getUser().createDomain(domainId);

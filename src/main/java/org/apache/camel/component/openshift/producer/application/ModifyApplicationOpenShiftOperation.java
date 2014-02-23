@@ -2,6 +2,7 @@ package org.apache.camel.component.openshift.producer.application;
 
 import org.apache.camel.Exchange;
 import org.apache.camel.component.openshift.ApplicationOperationType;
+import org.apache.camel.component.openshift.InvalidOpenShiftApplicationOperationException;
 import org.apache.camel.component.openshift.OpenShiftEndpoint;
 import org.apache.camel.component.openshift.OpenShiftOperation;
 import org.apache.camel.component.openshift.helper.OpenShiftHelper;
@@ -54,7 +55,7 @@ public class ModifyApplicationOpenShiftOperation implements
 			application.scaleUp();
 			break;
 		default:
-			throw new IllegalArgumentException("Invalid Application Operation");
+			throw new InvalidOpenShiftApplicationOperationException("Invalid Application Operation");
 		}
 		
 		return OpenShiftHelper.getApplicationByUUID(
